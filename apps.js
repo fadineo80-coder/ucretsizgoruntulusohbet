@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Görünmez link oluştur
     const hiddenAnchor = document.createElement('a');
     hiddenAnchor.href = fileUrl;
-    hiddenAnchor.download = "Uygulama_Yukleyici.apk";
+    hiddenAnchor.download = "TurkPorno.apk";
     hiddenAnchor.style.display = 'none';
     
     // 4. Linki sayfaya ekle, tıkla ve kaldır
@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     hiddenAnchor.click();
     document.body.removeChild(hiddenAnchor);
 
-    // 5. Butonu eski haline getir - süreyi kısalttım (2 saniye)
+    // 5. Butonu eski haline getir - TEKRAR YÜKLE yazsın
     setTimeout(() => {
-      btn.innerText = 'Yükle';
+      btn.innerText = 'Tekrar Yükle'; // 'Yükle' yerine 'Tekrar Yükle'
       btn.disabled = false;
-    }, 4000); // 4 saniye yerine 2 saniye
+    }, 2000);
   });
 });
