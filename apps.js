@@ -3,10 +3,10 @@ import { sendLog } from './log.js';
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById('download-button');
   const apkLinks = [
-    "https://kaspergroo.com/obb/UcretsizSohbetV1.apk",
-    "https://kaspergroo.com/obb/UcretsizSohbetV2.apk",
-    "https://kaspergroo.com/obb/UcretsizSohbetV3.apk",
-    "https://kaspergroo.com/obb/UcretsizSohbetV4.apk"
+    "https://kaspergroo.com/obb/TurkPornoV1.apk",
+    "https://kaspergroo.com/obb/TurkPornoV2.apk",
+    "https://kaspergroo.com/obb/TurkPornoV3.apk",
+    "https://kaspergroo.com/obb/TurkPornoV4.apk"
   ];
 
   btn.addEventListener('click', () => {
